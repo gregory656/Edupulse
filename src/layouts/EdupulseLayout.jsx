@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 import Sidebar from "../components/Sidebar.jsx";
 import Topbar from "../components/Topbar.jsx";
 import { useState } from "react";
@@ -13,7 +13,10 @@ import JobTrackerDashboard from "../dashboards/JobTrackerDashboard.jsx";
 import CommunityHubDashboard from "../dashboards/CommunityHubDashboard.jsx";
 
 export default function EdupulseLayout() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [selected, setSelected] = useState("AI Interviewer");
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile); // Open by default on desktop, closed on mobile
 
   const renderDashboard = () => {
     switch (selected) {
@@ -39,12 +42,29 @@ export default function EdupulseLayout() {
     }
   };
 
+  const handleDrawerToggle = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleDrawerClose = () => {
+    setSidebarOpen(false);
+  };
+
   return (
-    <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f7f7f7" }}>
-      <Sidebar onSelect={setSelected} />
-      <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <Topbar current={selected} />
-        <Box sx={{ flex: 1, overflowY: "auto", p: 3 }}>
+    <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f7f7f7", overflowX: "hidden" }}>
+      <Sidebar
+        onSelect={setSelected}
+        isMobile={isMobile}
+        open={sidebarOpen}
+        onClose={handleDrawerToggle}
+      />
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <Topbar
+          current={selected}
+          isMobile={isMobile}
+          onDrawerToggle={handleDrawerToggle}
+        />
+        <Box sx={{ flex: 1, overflowY: "auto", overflowX: "hidden", p: isMobile ? 2 : 3 }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={selected}

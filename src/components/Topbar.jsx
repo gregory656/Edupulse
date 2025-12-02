@@ -1,7 +1,8 @@
-import { AppBar, Toolbar, Typography, Avatar, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Avatar, Box, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
+import MenuIcon from "@mui/icons-material/Menu";
 
-export default function Topbar({ current }) {
+export default function Topbar({ current, isMobile, onDrawerToggle }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -22,6 +23,17 @@ export default function Topbar({ current }) {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={onDrawerToggle}
+              sx={{ mr: 2, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography
             variant="h6"
             color="primary"

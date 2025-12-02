@@ -193,8 +193,8 @@ ${userQuery}
   const recentHistory = history.slice(-6).reverse();
 
   return (
-    <Box p={4}>
-      <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
+    <Box p={{ xs: 2, sm: 4 }} sx={{ overflowX: 'hidden' }}>
+      <Typography variant="h4" color="primary" fontWeight={700} gutterBottom sx={{ wordBreak: 'break-word' }}>
         <PsychologyAltIcon sx={{ mr: 1, verticalAlign: "middle" }} />
         EdupulseAI Interviewer 🎤
       </Typography>
@@ -268,22 +268,23 @@ ${userQuery}
                   sx={{ mt: 2 }}
                 />
 
-                <Box mt={3} display="flex" gap={2}>
+                <Box mt={3} display="flex" flexDirection={{ xs: 'column', sm: 'row' }} gap={2}>
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={handleSubmitPractice}
                     disabled={loading || !answer.trim()}
                     startIcon={loading ? <CircularProgress size={18} /> : null}
+                    fullWidth={{ xs: true, sm: false }}
                   >
                     Submit Answer
                   </Button>
 
-                  <Button variant="outlined" onClick={generateQuestion} disabled={loading}>
+                  <Button variant="outlined" onClick={generateQuestion} disabled={loading} fullWidth={{ xs: true, sm: false }}>
                     Skip Question 🔁
                   </Button>
 
-                  <Button variant="text" color="inherit" onClick={() => setAnswer("")}>
+                  <Button variant="text" color="inherit" onClick={() => setAnswer("")} fullWidth={{ xs: true, sm: false }}>
                     Clear
                   </Button>
                 </Box>
@@ -303,18 +304,20 @@ ${userQuery}
                   onChange={(e) => setUserQuery(e.target.value)}
                 />
 
-                <Box mt={3} display="flex" gap={2}>
+                <Box mt={3} display="flex" flexDirection={{ xs: 'column', sm: 'row' }} gap={2}>
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={handleAskMode}
                     disabled={loading || !userQuery.trim()}
                     startIcon={loading ? <CircularProgress size={18} /> : null}
+                    fullWidth={{ xs: true, sm: false }}
+                    sx={{ minHeight: { xs: 48, sm: 36 } }}
                   >
                     Ask EdupulseAI
                   </Button>
 
-                  <Button variant="outlined" onClick={() => setUserQuery("")}>
+                  <Button variant="outlined" onClick={() => setUserQuery("")} fullWidth={{ xs: true, sm: false }} sx={{ minHeight: { xs: 48, sm: 36 } }}>
                     Clear
                   </Button>
                 </Box>
@@ -383,7 +386,7 @@ ${userQuery}
 
             <Divider sx={{ my: 2 }} />
 
-            <Stack direction="row" spacing={1}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
               <Button
                 size="small"
                 variant="outlined"
@@ -394,6 +397,7 @@ ${userQuery}
                   setAnswer(last.answer);
                   setMode("practice");
                 }}
+                fullWidth={{ xs: true, sm: false }}
               >
                 Replay Last
               </Button>
@@ -412,6 +416,7 @@ ${userQuery}
                   a.click();
                   URL.revokeObjectURL(url);
                 }}
+                fullWidth={{ xs: true, sm: false }}
               >
                 Export Session
               </Button>

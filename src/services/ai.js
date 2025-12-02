@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true, // only for testing! 🔥
+  dangerouslyAllowBrowser: true, // only for testing! 
 });
 
 export async function getInterviewFeedback(answer) {
