@@ -1,16 +1,19 @@
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 import Sidebar from "../components/Sidebar.jsx";
 import Topbar from "../components/Topbar.jsx";
-import { useState } from "react";
-import InterviewDashboard from "../dashboards/InterviewDashboard.jsx";
-import ResumeDashboard from "../dashboards/ResumeDashboard.jsx";
-import CareerPredictorDashboard from "../dashboards/CareerPredictorDashboard.jsx";
-import StudentAnalyticsDashboard from "../dashboards/StudentAnalyticsDashboard.jsx";
-import AIMentorDashboard from "../dashboards/AIMentorDashboard.jsx";
-import CourseRecommenderDashboard from "../dashboards/CourseRecommenderDashboard.jsx";
-import JobTrackerDashboard from "../dashboards/JobTrackerDashboard.jsx";
-import CommunityHubDashboard from "../dashboards/CommunityHubDashboard.jsx";
-import CareerCounselorDashboard from "../dashboards/CareerCounselorDashboard.jsx";
+import { useState, Suspense, lazy } from "react";
+import { DashboardSkeleton } from "../components/LoadingSkeleton.jsx";
+
+// Lazy load dashboard components
+const InterviewDashboard = lazy(() => import("../dashboards/InterviewDashboard.jsx"));
+const ResumeDashboard = lazy(() => import("../dashboards/ResumeDashboard.jsx"));
+const CareerPredictorDashboard = lazy(() => import("../dashboards/CareerPredictorDashboard.jsx"));
+const StudentAnalyticsDashboard = lazy(() => import("../dashboards/StudentAnalyticsDashboard.jsx"));
+const AIMentorDashboard = lazy(() => import("../dashboards/AIMentorDashboard.jsx"));
+const CourseRecommenderDashboard = lazy(() => import("../dashboards/CourseRecommenderDashboard.jsx"));
+const JobTrackerDashboard = lazy(() => import("../dashboards/JobTrackerDashboard.jsx"));
+const CommunityHubDashboard = lazy(() => import("../dashboards/CommunityHubDashboard.jsx"));
+const CareerCounselorDashboard = lazy(() => import("../dashboards/CareerCounselorDashboard.jsx"));
 
 export default function EdupulseLayout() {
   const theme = useTheme();
@@ -63,7 +66,9 @@ export default function EdupulseLayout() {
           onDrawerToggle={handleDrawerToggle}
         />
         <Box sx={{ flex: 1, overflowY: "auto", overflowX: "hidden", p: isMobile ? 2 : 3 }}>
-          {renderDashboard()}
+          <Suspense fallback={<DashboardSkeleton />}>
+            {renderDashboard()}
+          </Suspense>
         </Box>
       </Box>
     </Box>
