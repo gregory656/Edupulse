@@ -8,7 +8,6 @@ export default function StudentAnalyticsDashboard() {
   const [scores, setScores] = useState("");
   const [loading, setLoading] = useState(false);
   const [insights, setInsights] = useState([]);
-  const [history, setHistory] = useState([]);
 
   const handleAnalyze = async () => {
     if (!courses && !scores) return;
@@ -26,12 +25,6 @@ Scores (comma separated, same order): ${scores}
 
       const items = aiRaw.split(/\r?\n/).filter(line => line.trim() !== "");
       setInsights(items);
-
-      // Save session history
-      setHistory(prev => [
-        ...prev,
-        { courses, scores, insights: items, time: new Date().toISOString() },
-      ]);
     } catch (err) {
       console.error("Analytics error:", err);
       setInsights(["😅 EdupulseAI tripped — try again!"]);

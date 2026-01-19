@@ -111,7 +111,7 @@ Answer: ${answer}
 
       let feedbackText = aiRaw;
       if (scoreMatch) feedbackText = feedbackText.replace(scoreMatch[0], "").trim();
-      feedbackText = feedbackText.replace(/^[:]?\s*Feedback\s*[:\-]*/i, "").trim();
+      feedbackText = feedbackText.replace(/^[:]?\s*Feedback\s*[:-]*/i, "").trim();
 
       setHistory((prev) => [
         ...prev,

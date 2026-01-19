@@ -3,7 +3,6 @@ import Sidebar from "../components/Sidebar.jsx";
 import Topbar from "../components/Topbar.jsx";
 import { useState } from "react";
 import InterviewDashboard from "../dashboards/InterviewDashboard.jsx";
-import { motion, AnimatePresence } from "framer-motion";
 import ResumeDashboard from "../dashboards/ResumeDashboard.jsx";
 import CareerPredictorDashboard from "../dashboards/CareerPredictorDashboard.jsx";
 import StudentAnalyticsDashboard from "../dashboards/StudentAnalyticsDashboard.jsx";
@@ -11,6 +10,7 @@ import AIMentorDashboard from "../dashboards/AIMentorDashboard.jsx";
 import CourseRecommenderDashboard from "../dashboards/CourseRecommenderDashboard.jsx";
 import JobTrackerDashboard from "../dashboards/JobTrackerDashboard.jsx";
 import CommunityHubDashboard from "../dashboards/CommunityHubDashboard.jsx";
+import CareerCounselorDashboard from "../dashboards/CareerCounselorDashboard.jsx";
 
 export default function EdupulseLayout() {
   const theme = useTheme();
@@ -36,7 +36,9 @@ export default function EdupulseLayout() {
           return <JobTrackerDashboard />
         case "Community Hub":
         return<CommunityHubDashboard />
-      
+        case "CareerFlow":
+          return <CareerCounselorDashboard />
+
       default:
         return <h2 style={{ padding: 20 }}>🚧 Coming soon...</h2>;
     }
@@ -44,10 +46,6 @@ export default function EdupulseLayout() {
 
   const handleDrawerToggle = () => {
     setSidebarOpen(!sidebarOpen);
-  };
-
-  const handleDrawerClose = () => {
-    setSidebarOpen(false);
   };
 
   return (
@@ -65,17 +63,7 @@ export default function EdupulseLayout() {
           onDrawerToggle={handleDrawerToggle}
         />
         <Box sx={{ flex: 1, overflowY: "auto", overflowX: "hidden", p: isMobile ? 2 : 3 }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selected}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              {renderDashboard()}
-            </motion.div>
-          </AnimatePresence>
+          {renderDashboard()}
         </Box>
       </Box>
     </Box>

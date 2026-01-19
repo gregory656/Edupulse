@@ -9,7 +9,6 @@ export default function CareerPredictorDashboard() {
   const [interests, setInterests] = useState("");
   const [loading, setLoading] = useState(false);
   const [predictions, setPredictions] = useState([]);
-  const [history, setHistory] = useState([]);
 
   const handlePredict = async () => {
     if (!skills && !education && !interests) return;
@@ -29,12 +28,6 @@ Interests: ${interests}
       // Simple parsing: split by line breaks, filter empty lines
       const items = aiRaw.split(/\r?\n/).filter(line => line.trim() !== "");
       setPredictions(items);
-
-      // Save to history
-      setHistory(prev => [
-        ...prev,
-        { skills, education, interests, predictions: items, time: new Date().toISOString() },
-      ]);
     } catch (err) {
       console.error("Career prediction error:", err);
       setPredictions(["😅 EdupulseAI tripped — try again!"]);

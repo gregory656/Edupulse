@@ -50,7 +50,7 @@ export default function CommunityHubDashboard() {
         ...prev,
         { author: "EdupulseAI 🤖", content: aiReply.trim(), time: new Date().toLocaleTimeString() },
       ]);
-    } catch (err) {
+    } catch {
       setPosts(prev => [
         ...prev,
         { author: "EdupulseAI 🤖", content: "😅 Oops! My roast circuits glitched.", time: new Date().toLocaleTimeString() },

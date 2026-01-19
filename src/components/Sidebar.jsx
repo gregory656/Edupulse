@@ -1,5 +1,5 @@
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, Typography, Drawer, SwipeableDrawer } from "@mui/material";
-import { motion } from "framer-motion";
+
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
@@ -7,6 +7,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import ChatIcon from "@mui/icons-material/Chat";
 import WorkIcon from "@mui/icons-material/Work";
 import GroupIcon from "@mui/icons-material/Group";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { useState } from "react";
 
 const items = [
@@ -18,6 +19,7 @@ const items = [
   { text: "Course Recommender", icon: <SchoolIcon /> },
   { text: "Job Tracker", icon: <WorkIcon /> },
   { text: "Community Hub", icon: <GroupIcon /> },
+  { text: "CareerFlow", icon: <BusinessCenterIcon /> },
 ];
 
 export default function Sidebar({ onSelect, isMobile, open, onClose }) {
@@ -65,13 +67,8 @@ export default function Sidebar({ onSelect, isMobile, open, onClose }) {
 
       <List>
         {items.map((item) => (
-          <motion.div
+          <ListItemButton
             key={item.text}
-            whileHover={{ scale: 1.05, x: 8 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <ListItemButton
               onClick={() => handleClick(item)}
               sx={{
                 borderRadius: 2,
@@ -116,7 +113,6 @@ export default function Sidebar({ onSelect, isMobile, open, onClose }) {
                 }}
               />
             </ListItemButton>
-          </motion.div>
         ))}
       </List>
     </Box>
@@ -141,13 +137,5 @@ export default function Sidebar({ onSelect, isMobile, open, onClose }) {
     );
   }
 
-  return (
-    <motion.div
-      initial={{ x: -250 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      {drawerContent}
-    </motion.div>
-  );
+  return drawerContent;
 }

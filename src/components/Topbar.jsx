@@ -1,15 +1,9 @@
 import { AppBar, Toolbar, Typography, Avatar, Box, IconButton } from "@mui/material";
-import { motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Topbar({ current, isMobile, onDrawerToggle }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <AppBar
+    <AppBar
         position="static"
         color="transparent"
         elevation={0}
@@ -50,23 +44,17 @@ export default function Topbar({ current, isMobile, onDrawerToggle }) {
               Welcome, Stephen 😎
             </Typography>
 
-            <motion.div
-              whileHover={{ rotate: 360, scale: 1.2 }}
-              transition={{ duration: 0.6 }}
+            <Avatar
+              sx={{
+                bgcolor: "primary.main",
+                boxShadow: "0 0 10px rgba(106,13,173,0.4)",
+                transition: "all 0.3s ease",
+              }}
             >
-              <Avatar
-                sx={{
-                  bgcolor: "primary.main",
-                  boxShadow: "0 0 10px rgba(106,13,173,0.4)",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                S
-              </Avatar>
-            </motion.div>
+              S
+            </Avatar>
           </Box>
         </Toolbar>
       </AppBar>
-    </motion.div>
   );
 }

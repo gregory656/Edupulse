@@ -8,7 +8,6 @@ export default function CourseRecommenderDashboard() {
   const [level, setLevel] = useState(""); // optional: beginner, intermediate, advanced
   const [loading, setLoading] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
-  const [history, setHistory] = useState([]);
 
   const handleRecommend = async () => {
     if (!topic.trim()) return;
@@ -26,11 +25,6 @@ Return only the course names and optionally a short note (one line each).
       const aiRaw = await askAI(prompt);
       const items = aiRaw.split(/\r?\n/).filter(line => line.trim() !== "");
       setRecommendations(items);
-
-      setHistory(prev => [
-        ...prev,
-        { topic, level, recommendations: items, time: new Date().toISOString() },
-      ]);
     } catch (err) {
       console.error("Course Recommender error:", err);
       setRecommendations(["😅 EdupulseAI tripped — try again!"]);

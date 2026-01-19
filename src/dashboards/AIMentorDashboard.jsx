@@ -7,7 +7,6 @@ export default function AIMentorDashboard() {
   const [userQuestion, setUserQuestion] = useState("");
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState([]);
 
   const handleAsk = async (quickPrompt = "") => {
     const question = quickPrompt || userQuestion;
@@ -24,11 +23,6 @@ User Question: ${question}
       const aiRaw = await askAI(prompt);
       const lines = aiRaw.split(/\r?\n/).filter(line => line.trim() !== "");
       setResponse(lines);
-
-      setHistory(prev => [
-        ...prev,
-        { question, response: lines, time: new Date().toISOString() },
-      ]);
 
       setUserQuestion(""); // clear input
     } catch (err) {

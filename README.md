@@ -63,4 +63,4 @@ npm install
 
 # Run the project
 npm run dev
->>>>>>> 4c396ed6d830caa987309616de9aaf35819f5b66
+>>>>>>> 4c396ed6d830caa987309616de9aaf35819f5b66
